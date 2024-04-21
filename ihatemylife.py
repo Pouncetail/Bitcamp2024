@@ -22,13 +22,11 @@ def keywordExtractor(text):
         pos.update({str(token): token.pos_})
 
     # Grab keyphrases
-    keyphrases = []
+    keys_final = set()
+    dic = {}
+    keyphrases = set()
     for keyword, score in doc._.extract_keywords():
-        print(keyword, "-", score)
-        keyphrases.append(keyword)
-        for word in ((str)(keyword)).split() :
-            print(pos.get(word))
-        print("\n")
+        keyphrases.add(keyword)
     
     #quick searching named entities
     named = doc.ents
@@ -36,7 +34,8 @@ def keywordExtractor(text):
     for entity in named:
         print(entity.text, entity.label_)  
         
-        # splitting phrases into keywords
+    # splitting phrases into keywords, keyword processing
+    to_remove = set()
     for phrase in keyphrases:
     
         #check for named entity 
@@ -51,5 +50,14 @@ def keywordExtractor(text):
                 proper_match = ent
                 named_share = len(intersect)
 
-        # for regular words
-        URL = ('https://www.dictionary.com/browse/%s' % ((str)(phrase).lower()).replace(" ", "-")
+        if (named_share >= 2):
+            to_remove.add(phrase)
+    keyphrases = keyphrases.difference(to_remove)
+    keys_final = keyphrases.union(named)  
+    for key in keys_final:
+        DICTURL = ('https://www.dictionary.com/browse/%s' % ((str)(key.text).lower()).replace(" ", "_"))
+        WIKIURL = ('https://en.wikipedia.org/wiki/%s' % ((str)(key.text).lower()).replace(" ", "_"))
+        dic.update({key: (DICTURL, WIKIURL)})
+        text = text.replace(key.text, "<b>" + key.text + "</b>")
+    return (text, keys_final)
+              
