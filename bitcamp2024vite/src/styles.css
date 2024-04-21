@@ -1,0 +1,64 @@
+html,
+body {
+  text-align: center;
+  margin: auto;
+  padding: 0;
+}
+
+.flexcont {
+  display: flex;
+  justify-content: center;
+  word-wrap: break-word;
+}
+
+.left {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  overflow-y: scroll;
+  width: 25%;
+  border-radius: 2px;
+  white-space: pre-wrap;
+}
+
+#left {
+  word-wrap: break-word;
+}
+
+.right {
+  top: 0;
+  bottom: 0;
+  right: 0;
+  position: fixed;
+  overflow-y: scroll;
+  width: 25%;
+  border-radius: 2px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.middle {
+  float: center;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  white-space: pre-wrap;
+}
+
+#output {
+  float: center;
+  margin-left: auto;
+  margin-right: auto;
+  white-space: pre-wrap;
+}
+
+#blacktext {
+  overflow: scroll;
+  white-space: pre-wrap;
+  max-width: 100%;
+}
+
+.textbox {
+  max-width: 100%;
+}
