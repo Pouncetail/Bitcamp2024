@@ -60,4 +60,4 @@ def keywordExtractor(text):
         dic.update({key: (DICTURL, WIKIURL)})
         text = text.replace(key.text, "<b>" + key.text + "</b>")
     return (text, keys_final)
-              
+
